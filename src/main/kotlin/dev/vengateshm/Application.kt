@@ -26,14 +26,15 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+
 fun main() {
     embeddedServer(Netty, port = 8888, host = "0.0.0.0", module = Application::module).start(wait = true)
 }
 
 fun Application.module() {
-    val dbJdbcUrl = System.getProperty("db.jdbcurl")
-    val dbUser = System.getProperty("db.user")
-    val dbPassword = System.getProperty("db.password")
+    val dbJdbcUrl = System.getenv("db.jdbcurl")
+    val dbUser = System.getenv("db.user")
+    val dbPassword = System.getenv("db.password")
     val appDatabaseConfig = AppDatabaseConfig(
         driverClassName = "com.mysql.cj.jdbc.Driver",
         jdbcUrl = dbJdbcUrl,
@@ -45,18 +46,14 @@ fun Application.module() {
     val tokenConfig = TokenConfig(
 //        jwtIssuer = environment.config.property("jwt.issuer").getString(),
         // OS level export Linux, SET Windows
-        /*jwtSecret = System.getenv("jwt.secret"),
+        jwtSecret = System.getenv("jwt.secret"),
         jwtIssuer = System.getenv("jwt.issuer"),
         jwtAudience = System.getenv("jwt.audience"),
-        jwtRealm = System.getenv("jwt.realm"),*/
-        jwtSecret = System.getProperty("jwt.secret"),
-        jwtIssuer = System.getProperty("jwt.issuer"),
-        jwtAudience = System.getProperty("jwt.audience"),
-        jwtRealm = System.getProperty("jwt.realm"),
+        jwtRealm = System.getenv("jwt.realm"),
         expiresIn = 365L * 24L * 60L * 60L * 1000L,
     )
 
-    val clientId = System.getProperty("google_client_id")
+    val clientId = System.getenv("google_client_id")
         ?: throw RuntimeException("Client id not available for social login/signup")
 
     val authService = AuthServiceImpl(
