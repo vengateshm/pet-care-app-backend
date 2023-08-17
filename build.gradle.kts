@@ -58,3 +58,9 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 }
+
+tasks {
+    jar {
+        archiveBaseName.set("pet-care-app") // This is the name of the JAR file
+    }
+}
