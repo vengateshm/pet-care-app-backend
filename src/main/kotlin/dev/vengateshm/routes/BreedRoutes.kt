@@ -18,7 +18,7 @@ fun Route.breedRoutes() {
             val insertedBreedId = transaction {
                 BreedTable.insertAndGetId {
                     it[name] = newBreed.name
-                    it[speciesTypeId] = newBreed.speciesTypeId
+                    it[speciesTypeId] = newBreed.speciesTypeId!!
                 }
             }
             call.respond(HttpStatusCode.Created, mapOf("id" to insertedBreedId))
@@ -98,7 +98,7 @@ fun Route.breedRoutes() {
                 newBreeds.map { breed ->
                     BreedTable.insertAndGetId {
                         it[name] = breed.name
-                        it[speciesTypeId] = breed.speciesTypeId
+                        it[speciesTypeId] = breed.speciesTypeId!!
                     }
                 }
             }

@@ -7,7 +7,7 @@ object PetTable : IntIdTable("pet") {
     val gender = varchar("gender", 10)
     val dob = varchar("dob", 20)
     val imageUrl = varchar("image_url", 255)
-    val userId = integer("user_id").references(UserTable.id).nullable()
-    val speciesTypeId = integer("species_type_id").references(SpeciesTypeTable.id).nullable()
-    val breedId = integer("breed_id").references(BreedTable.id).nullable()
+    val userId = integer("user_id")
+    val speciesTypeId = integer("species_type_id")
+    val breedId = integer("breed_id")
 }

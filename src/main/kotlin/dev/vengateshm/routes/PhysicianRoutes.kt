@@ -3,7 +3,6 @@ package dev.vengateshm.routes
 import dev.vengateshm.db.tables.HospitalTable
 import dev.vengateshm.db.tables.PhysicianTable
 import dev.vengateshm.db.tables.SpecializationTable
-import dev.vengateshm.db.tables.TimeSlotTable
 import dev.vengateshm.models.Physician
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -101,8 +100,8 @@ fun Route.physicianRoutes() {
                     it[name] = newPhysician.name
                     it[email] = newPhysician.email
                     it[phone] = newPhysician.phone
-                    it[hospitalId] = newPhysician.hospitalId
-                    it[specializationId] = newPhysician.specializationId
+                    it[hospitalId] = newPhysician.hospitalId!!
+                    it[specializationId] = newPhysician.specializationId!!
                 }
             }
             call.respond(HttpStatusCode.Created, mapOf("id" to insertedPhysicianId.value))
@@ -118,8 +117,8 @@ fun Route.physicianRoutes() {
                         it[name] = updatedPhysician.name
                         it[email] = updatedPhysician.email
                         it[phone] = updatedPhysician.phone
-                        it[hospitalId] = updatedPhysician.hospitalId
-                        it[specializationId] = updatedPhysician.specializationId
+                        it[hospitalId] = updatedPhysician.hospitalId!!
+                        it[specializationId] = updatedPhysician.specializationId!!
                     }
                 }
 
@@ -159,8 +158,8 @@ fun Route.physicianRoutes() {
                         it[name] = physician.name
                         it[email] = physician.email
                         it[phone] = physician.phone
-                        it[hospitalId] = physician.hospitalId
-                        it[specializationId] = physician.specializationId
+                        it[hospitalId] = physician.hospitalId!!
+                        it[specializationId] = physician.specializationId!!
                     }
                 }
             }

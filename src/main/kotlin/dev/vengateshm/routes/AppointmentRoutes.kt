@@ -27,7 +27,7 @@ fun Route.appointmentRoutes() {
                 TimeSlotTable.select { TimeSlotTable.id eq newAppointment.timeSlotId }.singleOrNull()?.let {
                     TimeSlot(
                         it[TimeSlotTable.id].value,
-                        it[TimeSlotTable.physicianId].value,
+                        it[TimeSlotTable.physicianId],
                         it[TimeSlotTable.startTime],
                         it[TimeSlotTable.isAvailable],
                         it[TimeSlotTable.dayOfWeek],
@@ -81,9 +81,9 @@ fun Route.appointmentRoutes() {
                         .map {
                             val appointment = Appointment(
                                 it[AppointmentTable.id].value,
-                                it[AppointmentTable.physicianId].value,
-                                it[AppointmentTable.timeSlotId].value,
-                                it[AppointmentTable.userId].value,
+                                it[AppointmentTable.physicianId],
+                                it[AppointmentTable.timeSlotId],
+                                it[AppointmentTable.userId],
                                 DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(it[AppointmentTable.appointmentCreatedAt].toJavaLocalDateTime()),
                                 "",
                                 ""

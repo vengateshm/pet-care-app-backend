@@ -58,7 +58,7 @@ fun Route.timeSlotRoutes() {
                 TimeSlotTable.select { TimeSlotTable.physicianId eq physicianId }.map {
                     TimeSlot(
                         it[TimeSlotTable.id].value,
-                        it[TimeSlotTable.physicianId].value,
+                        it[TimeSlotTable.physicianId],
                         it[TimeSlotTable.startTime],
                         it[TimeSlotTable.isAvailable],
                         it[TimeSlotTable.dayOfWeek],

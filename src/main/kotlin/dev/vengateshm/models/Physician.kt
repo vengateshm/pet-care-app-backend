@@ -10,6 +10,6 @@ data class Physician(
     val phone: String,
     val hospitalId: Int?,
     val specializationId: Int?,
-    val hospitalName: String?,
-    val specializationName: String?,
+    val hospitalName: String?=null,
+    val specializationName: String?=null,
 )
