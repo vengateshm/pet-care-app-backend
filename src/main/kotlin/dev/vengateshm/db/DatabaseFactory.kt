@@ -24,6 +24,7 @@ object DatabaseFactory {
                 create(AppointmentTable)
                 create(PetTable)
                 create(AppServiceTable)
+                create(SpecializationTable)
             }
         }
     }
