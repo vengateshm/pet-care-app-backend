@@ -12,6 +12,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.datetime.toJavaLocalDateTime
+import org.jetbrains.exposed.sql.innerJoin
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -76,7 +77,7 @@ fun Route.appointmentRoutes() {
 
             if (userId != null) {
                 val appointments = transaction {
-                    (AppointmentTable innerJoin PhysicianTable)
+                    AppointmentTable.innerJoin(PhysicianTable, { physicianId }, { PhysicianTable.id })
                         .select { AppointmentTable.userId eq userId }
                         .map {
                             val appointment = Appointment(

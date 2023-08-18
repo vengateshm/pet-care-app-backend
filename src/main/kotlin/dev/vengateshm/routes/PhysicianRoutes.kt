@@ -43,7 +43,8 @@ fun Route.physicianRoutes() {
             }
 
             val physicians = transaction {
-                (PhysicianTable innerJoin HospitalTable innerJoin SpecializationTable)
+                PhysicianTable.innerJoin(HospitalTable, { hospitalId }, { HospitalTable.id })
+                    .innerJoin(SpecializationTable, { PhysicianTable.specializationId }, { SpecializationTable.id })
                     .select { PhysicianTable.specializationId eq specializationId }
                     .map {
                         Physician(
